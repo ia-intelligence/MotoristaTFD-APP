@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MotoristaApp.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MotoristaApp.ViewModels"
+    xmlns:models="clr-namespace:MotoristaApp.Models"
+    x:DataType="viewmodels:HomePageViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Conteúdo principal -->
+        <Grid RowDefinitions="Auto,*,Auto">
+
+            <!-- Header -->
+            <Grid
+                Grid.Row="0"
+                HeightRequest="110"
+                Padding="18,18,18,16"
+                BackgroundColor="#2357C6">
+
+                <Grid ColumnDefinitions="50,*,50" VerticalOptions="End">
+                    <ImageButton
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding AlternarMenuCommand}"
+                        HeightRequest="34"
+                        Source="ic_menu.png"
+                        WidthRequest="34" />
+
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Motorista"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+
+                    <ImageButton
+                        Grid.Column="2"
+                        BackgroundColor="Transparent"
+                        Command="{Binding AbrirQrCodeCommand}"
+                        HeightRequest="34"
+                        Source="ic_qrcode.png"
+                        WidthRequest="34" />
+                </Grid>
+            </Grid>
+
+            <!-- Fundo mapa + lista -->
+            <Grid Grid.Row="1">
+                <Image
+                    Aspect="AspectFill"
+                    Opacity="0.18"
+                    Source="bg_mapa.png" />
+
+                <ScrollView>
+                    <VerticalStackLayout Padding="18,20,18,24" Spacing="18">
+                        <CollectionView
+                            ItemsSource="{Binding CardsHome}"
+                            SelectionMode="None">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="18" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:MenuCardItem">
+                                    <Border
+                                        Padding="16"
+                                        BackgroundColor="White"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 22">
+                                        <Grid ColumnDefinitions="72,*,28" ColumnSpacing="14">
+                                            <Image
+                                                Grid.Column="0"
+                                                HeightRequest="52"
+                                                HorizontalOptions="Center"
+                                                Source="{Binding Icone}"
+                                                VerticalOptions="Center"
+                                                WidthRequest="52" />
+
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="6"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="19"
+                                                    Text="{Binding Titulo}"
+                                                    TextColor="#111111" />
+
+                                                <Label
+                                                    FontSize="14"
+                                                    LineBreakMode="WordWrap"
+                                                    Text="{Binding Descricao}"
+                                                    TextColor="#333333" />
+                                            </VerticalStackLayout>
+
+                                            <Label
+                                                Grid.Column="2"
+                                                FontSize="28"
+                                                HorizontalTextAlignment="Center"
+                                                Text="›"
+                                                TextColor="#7C8395"
+                                                VerticalTextAlignment="Center" />
+
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirCardCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!-- Bottom Bar -->
+            <Border
+                Grid.Row="2"
+                Padding="10,10,10,12"
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 26,26,0,0">
+                <Grid ColumnDefinitions="*,*,*,*">
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding IrInicioCommand}"
+                            HeightRequest="30"
+                            Source="ic_home.png"
+                            WidthRequest="30" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Início"
+                            TextColor="#F29A2E" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding IrNavegarCommand}"
+                            HeightRequest="30"
+                            Source="ic_gps.png"
+                            WidthRequest="30" />
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Navegar"
+                            TextColor="#3A3F4B" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding IrAlertasCommand}"
+                            HeightRequest="30"
+                            Source="ic_bell.png"
+                            WidthRequest="30" />
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Alertas"
+                            TextColor="#3A3F4B" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="2">
+                        <ImageButton
+                            BackgroundColor="Transparent"
+                            Command="{Binding IrConfigCommand}"
+                            HeightRequest="30"
+                            Source="ic_config.png"
+                            WidthRequest="30" />
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="Config"
+                            TextColor="#3A3F4B" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Overlay -->
+        <Grid
+            BackgroundColor="#66000000"
+            InputTransparent="False"
+            IsVisible="{Binding MenuAberto}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding FecharMenuCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <!-- Menu lateral -->
+        <Grid
+            HorizontalOptions="Start"
+            IsVisible="{Binding MenuAberto}"
+            WidthRequest="300">
+            <Border
+                BackgroundColor="#F4F5FA"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 0,0,18,18">
+
+                <Grid RowDefinitions="Auto,*">
+                    <!-- Topo do menu -->
+                    <Grid
+                        Padding="16,26,16,18"
+                        BackgroundColor="#2357C6">
+                        <Grid ColumnDefinitions="72,*" ColumnSpacing="12">
+                            <Frame
+                                Grid.Column="0"
+                                Padding="0"
+                                BackgroundColor="White"
+                                BorderColor="White"
+                                CornerRadius="36"
+                                HasShadow="False"
+                                HeightRequest="64"
+                                WidthRequest="64">
+                                <Image
+                                    Aspect="AspectFill"
+                                    Source="perfil_fake.png" />
+                            </Frame>
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="3"
+                                VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="{Binding NomeMotorista}"
+                                    TextColor="White" />
+                                <Label
+                                    FontSize="13"
+                                    Text="{Binding EmailMotorista}"
+                                    TextColor="#DCE6FF" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Itens -->
+                    <ScrollView Grid.Row="1">
+                        <VerticalStackLayout Padding="14,14,14,22" Spacing="0">
+                            <CollectionView
+                                ItemsSource="{Binding ItensMenu}"
+                                SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:SideMenuItem">
+                                        <Grid Padding="10,14" ColumnDefinitions="42,*">
+                                            <Image
+                                                Grid.Column="0"
+                                                HeightRequest="26"
+                                                Source="{Binding Icone}"
+                                                WidthRequest="26" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                FontAttributes="Bold"
+                                                FontSize="16"
+                                                Text="{Binding Titulo}"
+                                                TextColor="#1B1B1B"
+                                                VerticalTextAlignment="Center" />
+
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>
