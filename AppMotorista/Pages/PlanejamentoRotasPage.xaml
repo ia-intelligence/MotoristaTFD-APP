@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="AppMotorista.Pages.RecepcaoViagensPage"
+    x:Class="AppMotorista.Pages.PlanejamentoRotasPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:AppMotorista.Models"
     xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
-    x:DataType="viewmodels:RecepcaoViagensViewModel"
+    x:DataType="viewmodels:PlanejamentoRotasViewModel"
     BackgroundColor="#ECECEC"
     Shell.NavBarIsVisible="False">
 
@@ -35,28 +35,50 @@
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="18,18,18,24" Spacing="14">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    Text="Viagens programadas"
-                    TextColor="#1B1B1B" />
+
+                <Border
+                    Padding="14"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 18">
+                    <Grid ColumnDefinitions="28,*,Auto" ColumnSpacing="10">
+                        <Image
+                            HeightRequest="20"
+                            Source="trip_icon.svg"
+                            WidthRequest="20" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="15"
+                            Text="{Binding FiltroData}"
+                            TextColor="#333333"
+                            VerticalTextAlignment="Center" />
+                        <Button
+                            Grid.Column="2"
+                            Command="{Binding NovaRotaCommand}"
+                            BackgroundColor="#2357C6"
+                            CornerRadius="12"
+                            HeightRequest="36"
+                            Text="+ Nova rota"
+                            TextColor="White" />
+                    </Grid>
+                </Border>
 
                 <CollectionView
-                    ItemsSource="{Binding Viagens}"
+                    ItemsSource="{Binding Rotas}"
                     SelectionMode="None">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ReceptionTripItem">
+                        <DataTemplate x:DataType="models:RoutePlanningItem">
                             <Border
                                 Padding="16"
                                 BackgroundColor="White"
                                 StrokeThickness="0"
                                 StrokeShape="RoundRectangle 20">
 
-                                <VerticalStackLayout Spacing="12">
+                                <VerticalStackLayout Spacing="10">
                                     <Grid ColumnDefinitions="*,Auto">
                                         <VerticalStackLayout Spacing="2">
                                             <Label
@@ -65,7 +87,7 @@
                                                 TextColor="#666666" />
                                             <Label
                                                 FontAttributes="Bold"
-                                                FontSize="22"
+                                                FontSize="20"
                                                 Text="{Binding Horario}"
                                                 TextColor="#2357C6" />
                                         </VerticalStackLayout>
@@ -75,8 +97,7 @@
                                             Padding="10,4"
                                             BackgroundColor="#EEF1FF"
                                             StrokeThickness="0"
-                                            StrokeShape="RoundRectangle 12"
-                                            VerticalOptions="Start">
+                                            StrokeShape="RoundRectangle 12">
                                             <Label
                                                 FontAttributes="Bold"
                                                 FontSize="12"
@@ -87,55 +108,28 @@
 
                                     <Label
                                         FontAttributes="Bold"
-                                        FontSize="19"
+                                        FontSize="18"
                                         Text="{Binding Destino}"
                                         TextColor="#1B1B1B" />
 
-                                    <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
-                                        <Image
-                                            HeightRequest="18"
-                                            Source="trip_icon.svg"
-                                            WidthRequest="18" />
-                                        <Label
-                                            Grid.Column="1"
-                                            FontSize="14"
-                                            Text="{Binding Veiculo}"
-                                            TextColor="#555555" />
-                                    </Grid>
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Veiculo}"
+                                        TextColor="#555555" />
 
-                                    <Grid ColumnDefinitions="24,*" ColumnSpacing="8">
-                                        <Image
-                                            HeightRequest="18"
-                                            Source="menuhamburguer_icon.svg"
-                                            WidthRequest="18" />
-                                        <Label
-                                            Grid.Column="1"
-                                            FontSize="14"
-                                            Text="{Binding Motorista}"
-                                            TextColor="#555555" />
-                                    </Grid>
-
-                                    <Border
-                                        Padding="10"
-                                        BackgroundColor="#FFF4E5"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 14"
-                                        IsVisible="{Binding TravaFaturamentoAtiva}">
-                                        <Label
-                                            FontAttributes="Bold"
-                                            FontSize="12"
-                                            Text="Trava de faturamento ativa para veículo próprio"
-                                            TextColor="#B96A00" />
-                                    </Border>
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding QuantidadePacientes}"
+                                        TextColor="#555555" />
 
                                     <Button
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RecepcaoViagensViewModel}}, Path=AbrirDetalheCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:PlanejamentoRotasViewModel}}, Path=AbrirRotaCommand}"
                                         CommandParameter="{Binding .}"
-                                        BackgroundColor="#2357C6"
+                                        BackgroundColor="#F2F4FA"
                                         CornerRadius="14"
-                                        HeightRequest="44"
-                                        Text="Ver detalhe"
-                                        TextColor="White" />
+                                        HeightRequest="42"
+                                        Text="Abrir rota"
+                                        TextColor="#2357C6" />
                                 </VerticalStackLayout>
                             </Border>
                         </DataTemplate>

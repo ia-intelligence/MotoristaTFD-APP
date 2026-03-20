@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.CadastroVeiculosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    x:DataType="viewmodels:CadastroVeiculosViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid
+            Grid.Row="0"
+            Padding="18,20,18,16"
+            BackgroundColor="#2357C6"
+            ColumnDefinitions="48,*,48">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="24"
+                Source="menuhamburguer_icon.svg"
+                WidthRequest="24" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="14">
+
+                <Button
+                    Command="{Binding NovoCadastroCommand}"
+                    BackgroundColor="#2357C6"
+                    CornerRadius="16"
+                    HeightRequest="46"
+                    Text="+ Adicionar veículo"
+                    TextColor="White" />
+
+                <CollectionView
+                    ItemsSource="{Binding Itens}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FleetItem">
+                            <Border
+                                Padding="16"
+                                BackgroundColor="White"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 20">
+
+                                <VerticalStackLayout Spacing="8">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="{Binding Veiculo}"
+                                        TextColor="#1B1B1B" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Placa}"
+                                        TextColor="#555555" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Combustivel}"
+                                        TextColor="#555555" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Motorista}"
+                                        TextColor="#555555" />
+
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Capacidade}"
+                                        TextColor="#555555" />
+
+                                    <Button
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CadastroVeiculosViewModel}}, Path=AbrirItemCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#F2F4FA"
+                                        CornerRadius="14"
+                                        HeightRequest="42"
+                                        Text="Ver cadastro"
+                                        TextColor="#2357C6" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
