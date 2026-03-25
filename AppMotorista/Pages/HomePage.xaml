@@ -3,6 +3,7 @@
     x:Class="AppMotorista.Pages.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="http://schemas.devexpress.com/maui"
     xmlns:models="clr-namespace:AppMotorista.Models"
     xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
     x:DataType="viewmodels:HomePageViewModel"
@@ -12,7 +13,7 @@
     <Grid>
         <Grid RowDefinitions="Auto,*,Auto">
 
-            <!--  TOPO  -->
+            <!-- TOPO -->
             <Grid
                 Grid.Row="0"
                 Padding="18,24,18,18"
@@ -62,43 +63,41 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <!--  CONTEÚDO  -->
+            <!-- CONTEÚDO -->
             <ScrollView Grid.Row="1">
-                <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
+                <VerticalStackLayout Padding="0,18,0,24" Spacing="18">
 
-                    <!--  VIAGENS DO DIA  -->
+                    <!-- VIAGENS DO DIA -->
                     <VerticalStackLayout Spacing="10">
-                        <Grid ColumnDefinitions="*,Auto">
+                        <Grid
+                            Padding="18,0"
+                            ColumnDefinitions="*,Auto">
                             <Label
                                 FontAttributes="Bold"
                                 FontSize="18"
                                 Text="Viagens do dia"
                                 TextColor="#1B1B1B" />
-
-                            <Label
-                                Grid.Column="1"
-                                FontSize="13"
-                                Text="Deslize para ver mais"
-                                TextColor="#7A7A7A"
-                                VerticalTextAlignment="End" />
                         </Grid>
 
-                        <CollectionView
-                            HeightRequest="250"
-                            ItemsSource="{Binding ViagensDoDia}"
-                            SelectionMode="None">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="14" Orientation="Horizontal" />
-                            </CollectionView.ItemsLayout>
+                    
+                        
+                        <dx:DXCollectionView
+                        Margin="12,0,0,0"
+                        HeightRequest="285"
+                        IsScrollBarVisible="False"
+                        ItemsSource="{Binding ViagensDoDia}"
+                        ItemSize="280"
+                        ItemSpacing="12"
+                        Orientation="Horizontal"
+                        SelectionMode="None">
 
-                            <CollectionView.ItemTemplate>
+                            <dx:DXCollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:TripSummaryItem">
                                     <Border
                                         Padding="18"
                                         BackgroundColor="White"
-                                        StrokeShape="RoundRectangle 22"
                                         StrokeThickness="0"
-                                        WidthRequest="300">
+                                        StrokeShape="RoundRectangle 22">
 
                                         <VerticalStackLayout Spacing="14">
                                             <Label
@@ -125,8 +124,8 @@
                                                     Grid.Column="1"
                                                     Padding="10,5"
                                                     BackgroundColor="#E8F6EC"
-                                                    StrokeShape="RoundRectangle 12"
                                                     StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 12"
                                                     VerticalOptions="Start">
                                                     <Label
                                                         FontAttributes="Bold"
@@ -139,11 +138,15 @@
                                             <Label
                                                 FontAttributes="Bold"
                                                 FontSize="19"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="2"
                                                 Text="{Binding Destino}"
                                                 TextColor="#222222" />
 
                                             <Label
                                                 FontSize="14"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="2"
                                                 Text="{Binding Veiculo}"
                                                 TextColor="#666666" />
 
@@ -158,18 +161,22 @@
                                         </VerticalStackLayout>
                                     </Border>
                                 </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                            </dx:DXCollectionView.ItemTemplate>
+                        </dx:DXCollectionView>
                     </VerticalStackLayout>
 
-                    <!--  AÇÕES PRINCIPAIS  -->
+                    <!-- AÇÕES PRINCIPAIS -->
                     <Label
+                        Margin="18,0,18,0"
                         FontAttributes="Bold"
                         FontSize="18"
                         Text="Ações principais"
                         TextColor="#1B1B1B" />
 
-                    <CollectionView ItemsSource="{Binding AtalhosPrincipais}" SelectionMode="None">
+                    <CollectionView
+                        Margin="18,0,18,0"
+                        ItemsSource="{Binding AtalhosPrincipais}"
+                        SelectionMode="None">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -187,7 +194,9 @@
                                         ColumnSpacing="12"
                                         MinimumHeightRequest="82">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
+                                                CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image
@@ -228,14 +237,18 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <!--  CONSULTA DA VIAGEM  -->
+                    <!-- CONSULTA DA VIAGEM -->
                     <Label
+                        Margin="18,0,18,0"
                         FontAttributes="Bold"
                         FontSize="18"
                         Text="Consulta da viagem"
                         TextColor="#1B1B1B" />
 
-                    <CollectionView ItemsSource="{Binding AtalhosConsulta}" SelectionMode="None">
+                    <CollectionView
+                        Margin="18,0,18,0"
+                        ItemsSource="{Binding AtalhosConsulta}"
+                        SelectionMode="None">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
@@ -244,6 +257,7 @@
                             <DataTemplate x:DataType="models:QuickAccessItem">
                                 <Border
                                     Padding="16"
+                                   
                                     BackgroundColor="White"
                                     StrokeShape="RoundRectangle 20"
                                     StrokeThickness="0">
@@ -253,7 +267,9 @@
                                         ColumnSpacing="12"
                                         MinimumHeightRequest="82">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirAtalhoCommand}"
+                                                CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image
@@ -294,8 +310,9 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
-                    <!--  ALERTAS OPERACIONAIS  -->
+                    <!-- ALERTAS OPERACIONAIS -->
                     <Border
+                        Margin="18,0,18,0"
                         Padding="16"
                         BackgroundColor="White"
                         StrokeShape="RoundRectangle 20"
@@ -324,7 +341,7 @@
                 </VerticalStackLayout>
             </ScrollView>
 
-            <!--  BOTTOM BAR  -->
+            <!-- BOTTOM BAR -->
             <Border
                 Grid.Row="2"
                 Padding="10,8,10,10"
@@ -340,7 +357,7 @@
                             BackgroundColor="Transparent"
                             Command="{Binding IrInicioCommand}"
                             HeightRequest="24"
-                            Source="home_icon.svg"
+                            Source="menuhamburguer_icon.svg"
                             WidthRequest="24" />
                         <Label
                             FontAttributes="Bold"
@@ -416,14 +433,14 @@
             </Border>
         </Grid>
 
-        <!--  OVERLAY  -->
+        <!-- OVERLAY -->
         <Grid BackgroundColor="#66000000" IsVisible="{Binding MenuAberto}">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding FecharMenuCommand}" />
             </Grid.GestureRecognizers>
         </Grid>
 
-        <!--  MENU LATERAL  -->
+        <!-- MENU LATERAL -->
         <Grid
             HorizontalOptions="Start"
             IsVisible="{Binding MenuAberto}"
@@ -466,7 +483,9 @@
 
                                     <Grid ColumnDefinitions="32,*" ColumnSpacing="10">
                                         <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}" CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomePageViewModel}}, Path=AbrirItemMenuCommand}"
+                                                CommandParameter="{Binding .}" />
                                         </Grid.GestureRecognizers>
 
                                         <Image

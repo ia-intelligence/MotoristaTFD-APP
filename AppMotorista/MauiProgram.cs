@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using DevExpress.Maui;
 
 namespace AppMotorista
 {
@@ -13,6 +14,9 @@ namespace AppMotorista
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UseMauiMaps()
+                .UseDevExpress()
+                .UseDevExpressControls()
+                .UseDevExpressCollectionView()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
