@@ -14,9 +14,9 @@
         android:roundIcon="@mipmap/appicon_round"
         android:supportsRtl="true">
 
-        <!--<meta-data
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="SUA_CHAVE_GOOGLE_MAPS_AQUI" />-->
+            android:value="AIzaSyCofFa9H8FsbPYg_aW_sW_EECsMI3m03sQ" />
 
     </application>
 
