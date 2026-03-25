@@ -62,7 +62,7 @@ public partial class HomePageViewModel : ObservableObject
 
         ProximaViagem = ViagensDoDia.FirstOrDefault();
     }
-
+    //Botões dos atalhos principais
     private void PopularAtalhosPrincipais()
     {
         AtalhosPrincipais.Add(new QuickAccessItem
@@ -70,7 +70,7 @@ public partial class HomePageViewModel : ObservableObject
             Titulo = "Minhas Viagens",
             Descricao = "Veja as viagens programadas e confirmadas do dia.",
             Icone = "clipboard_check_icon.svg",
-            Rota = nameof(RecepcaoViagensPage)
+            Rota = nameof(MinhasViagensPage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
@@ -144,7 +144,7 @@ public partial class HomePageViewModel : ObservableObject
     private void PopularMenu()
     {
         ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "home_icon.svg", Rota = nameof(HomePage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Minhas Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(RecepcaoViagensPage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Minhas Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(MinhasViagensPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Mapa", Icone = "trip_icon.svg", Rota = nameof(MapaTestePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Alertas e Ocorrências", Icone = "bell_pin_icon.svg", Rota = nameof(AlertasPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Veículo da viagem", Icone = "fleet_icon.svg", Rota = nameof(CadastroVeiculosPage) });
@@ -209,7 +209,7 @@ public partial class HomePageViewModel : ObservableObject
     private async Task IrInicio() => await Shell.Current.GoToAsync(nameof(HomePage));
 
     [RelayCommand]
-    private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(RecepcaoViagensPage));
+    private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(MinhasViagensPage));
 
     [RelayCommand]
     private async Task IrMapa() => await NavegarOuMostrarPlaceholder(nameof(MapaTestePage), "Mapa");
@@ -223,7 +223,7 @@ public partial class HomePageViewModel : ObservableObject
     private static readonly HashSet<string> RotasImplementadas = new()
     {
         nameof(HomePage),
-        nameof(RecepcaoViagensPage),
+        nameof(MinhasViagensPage),
         nameof(CadastroVeiculosPage),
         nameof(LocaisPage),
         nameof(AgrupamentoPacientesPage),

@@ -90,6 +90,9 @@
 	  <Compile Update="Pages\HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\MinhasViagensPage.xaml.cs">
+	    <DependentUpon>MinhasViagensPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -123,7 +126,7 @@
 	  <MauiXaml Update="Pages\PlanejamentoRotasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\RecepcaoViagensPage.xaml">
+	  <MauiXaml Update="Pages\MinhasViagensPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SuportePage.xaml">
