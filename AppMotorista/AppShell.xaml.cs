@@ -21,7 +21,7 @@ namespace AppMotorista
             Routing.RegisterRoute(nameof(OcorrenciaFormPage), typeof(OcorrenciaFormPage));
             Routing.RegisterRoute(nameof(DetalheViagemPage), typeof(DetalheViagemPage));
 
-            Routing.RegisterRoute(nameof(MapaTestePage), typeof(MapaTestePage));
+            Routing.RegisterRoute(nameof(MapaViagemPage), typeof(MapaViagemPage));
         }
     }
 }

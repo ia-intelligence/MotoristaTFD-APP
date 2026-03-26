@@ -35,7 +35,7 @@ public partial class OcorrenciaFormViewModel : ObservableObject
     [RelayCommand]
     private async Task Salvar()
     {
-        await Shell.Current.DisplayAlert(
+        await Shell.Current.DisplayAlertAsync(
             "Ocorrência registrada",
             "A ocorrência foi salva no fluxo mockado com sucesso.",
             "OK");

@@ -50,13 +50,13 @@ public partial class CadastroVeiculosViewModel : ObservableObject
     [RelayCommand]
     private async Task NovoCadastro()
     {
-        await Shell.Current.DisplayAlert("Cadastro", "Novo veículo/motorista", "OK");
+        await Shell.Current.DisplayAlertAsync("Cadastro", "Novo veículo/motorista", "OK");
     }
 
     [RelayCommand]
     private async Task AbrirItem(FleetItem item)
     {
         if (item is null) return;
-        await Shell.Current.DisplayAlert("Veículo", $"{item.Veiculo} - {item.Placa}", "OK");
+        await Shell.Current.DisplayAlertAsync("Veículo", $"{item.Veiculo} - {item.Placa}", "OK");
     }
 }

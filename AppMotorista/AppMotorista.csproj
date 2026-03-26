@@ -90,6 +90,9 @@
 	  <Compile Update="Pages\HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\MapaViagemPage.xaml.cs">
+	    <DependentUpon>MapaViagemPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\MinhasViagensPage.xaml.cs">
 	    <DependentUpon>MinhasViagensPage.xaml</DependentUpon>
 	  </Compile>
@@ -117,7 +120,7 @@
 	  <MauiXaml Update="Pages\LocaisPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\MapaTestePage.xaml">
+	  <MauiXaml Update="Pages\MapaViagemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\OcorrenciaFormPage.xaml">

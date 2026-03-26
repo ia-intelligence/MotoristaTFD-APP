@@ -40,7 +40,7 @@ public partial class EquipeApoioViewModel : ObservableObject
     [RelayCommand]
     private async Task NovoVinculo()
     {
-        await Shell.Current.DisplayAlert("Equipe", "Novo vínculo de apoio", "OK");
+        await Shell.Current.DisplayAlertAsync("Equipe", "Novo vínculo de apoio", "OK");
     }
 
     [RelayCommand]
@@ -48,6 +48,6 @@ public partial class EquipeApoioViewModel : ObservableObject
     {
         if (item is null) return;
 
-        await Shell.Current.DisplayAlert("Profissional", $"{item.Profissional}\n{item.Funcao}", "OK");
+        await Shell.Current.DisplayAlertAsync("Profissional", $"{item.Profissional}\n{item.Funcao}", "OK");
     }
 }

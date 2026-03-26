@@ -78,7 +78,7 @@ public partial class HomePageViewModel : ObservableObject
             Titulo = "Abrir mapa",
             Descricao = "Acesse a navegação e a rota da viagem atual.",
             Icone = "trip_icon.svg",
-            Rota = nameof(MapaTestePage)
+            Rota = nameof(MapaViagemPage)
         });
 
         AtalhosPrincipais.Add(new QuickAccessItem
@@ -145,7 +145,7 @@ public partial class HomePageViewModel : ObservableObject
     {
         ItensMenu.Add(new SideMenuItem { Titulo = "Início", Icone = "home_icon.svg", Rota = nameof(HomePage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Minhas Viagens", Icone = "clipboard_check_icon.svg", Rota = nameof(MinhasViagensPage) });
-        ItensMenu.Add(new SideMenuItem { Titulo = "Mapa", Icone = "trip_icon.svg", Rota = nameof(MapaTestePage) });
+        ItensMenu.Add(new SideMenuItem { Titulo = "Mapa", Icone = "trip_icon.svg", Rota = nameof(MapaViagemPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Alertas e Ocorrências", Icone = "bell_pin_icon.svg", Rota = nameof(AlertasPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Veículo da viagem", Icone = "fleet_icon.svg", Rota = nameof(CadastroVeiculosPage) });
         ItensMenu.Add(new SideMenuItem { Titulo = "Pontos da viagem", Icone = "location_icon.svg", Rota = nameof(LocaisPage) });
@@ -212,7 +212,7 @@ public partial class HomePageViewModel : ObservableObject
     private async Task IrViagens() => await Shell.Current.GoToAsync(nameof(MinhasViagensPage));
 
     [RelayCommand]
-    private async Task IrMapa() => await NavegarOuMostrarPlaceholder(nameof(MapaTestePage), "Mapa");
+    private async Task IrMapa() => await NavegarOuMostrarPlaceholder(nameof(MapaViagemPage), "Mapa");
 
     [RelayCommand]
     private async Task IrAlertas() => await NavegarOuMostrarPlaceholder(nameof(AlertasPage), "Alertas e Ocorrências");
@@ -233,7 +233,7 @@ public partial class HomePageViewModel : ObservableObject
         nameof(SuportePage),
         nameof(DetalheViagemPage),
         nameof(OcorrenciaFormPage),
-        nameof(MapaTestePage)
+        nameof(MapaViagemPage)
     };
 
     private static async Task NavegarOuMostrarPlaceholder(string rota, string titulo)

@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Devices.Sensors;
+using AppMotorista.Pages;
 
 namespace AppMotorista.ViewModels;
 
@@ -10,17 +10,30 @@ public partial class DetalheViagemViewModel : ObservableObject
     [ObservableProperty] private string tituloPagina = "Detalhe da Viagem";
     [ObservableProperty] private string codigoViagem = "VGM-2024-018";
     [ObservableProperty] private string status = "Confirmada";
-    [ObservableProperty] private string statusCorFundo = "#E8F5E9";
-    [ObservableProperty] private string statusCorTexto = "#2E7D32";
+    [ObservableProperty] private string statusCorFundo = "#E8F6EC";
+    [ObservableProperty] private string statusCorTexto = "#239B56";
     [ObservableProperty] private string data = "24/04/2024";
     [ObservableProperty] private string horario = "07:40";
     [ObservableProperty] private string origem = "UBS Central";
     [ObservableProperty] private string destino = "Hospital Ana Nery";
     [ObservableProperty] private string veiculo = "Citroën Jumpy - QWE-1234";
     [ObservableProperty] private string motorista = "Gabriel Almeida";
-    [ObservableProperty] private string apoio = "Enfermagem - Juliana Costa";
-    [ObservableProperty] private string pacientes = "3 pacientes vinculados";
-    [ObservableProperty] private string observacoes = "Viagem programada com embarque prioritário. Necessário confirmar presença antes da saída.";
+    [ObservableProperty] private string equipeApoio = "Juliana Costa • Técnica de Enfermagem";
+    [ObservableProperty] private string observacoes = "Viagem com embarque prioritário. Confirmar presença antes da saída.";
+    [ObservableProperty] private string resumoPassageiros = "3 passageiros vinculados";
+
+    public ObservableCollection<string> PontosDaRota { get; } = new();
+    public ObservableCollection<string> Passageiros { get; } = new();
+
+    public DetalheViagemViewModel()
+    {
+        PontosDaRota.Add("UBS Central");
+        PontosDaRota.Add("Ponto de apoio - Avenida Brasil");
+        PontosDaRota.Add("Hospital Ana Nery");
+        Passageiros.Add("Maria Aparecida");
+        Passageiros.Add("José Carlos");
+        Passageiros.Add("Ana Luiza");
+    }
 
     [RelayCommand]
     private async Task Voltar()
@@ -29,48 +42,32 @@ public partial class DetalheViagemViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task EditarViagem()
+    private async Task IniciarViagem()
     {
         await Shell.Current.DisplayAlertAsync(
-            "Editar viagem",
-            "Tela de edição mockada será conectada na próxima etapa.",
+            "Viagem iniciada",
+            "A viagem foi iniciada no fluxo mockado.",
             "OK");
+    }
+
+    [RelayCommand]
+    private async Task AbrirMapa()
+    {
+        await Shell.Current.GoToAsync(nameof(MapaViagemPage));
     }
 
     [RelayCommand]
     private async Task RegistrarOcorrencia()
     {
-        await Shell.Current.GoToAsync(nameof(Pages.OcorrenciaFormPage));
+        await Shell.Current.GoToAsync(nameof(OcorrenciaFormPage));
     }
 
     [RelayCommand]
-    private async Task ConfirmarSaida()
+    private async Task AbrirEmbarque()
     {
         await Shell.Current.DisplayAlertAsync(
-            "Saída confirmada",
-            "A viagem foi marcada como iniciada no fluxo mockado.",
+            "Embarque",
+            "Tela de embarque/QR code será conectada na próxima etapa.",
             "OK");
-    }
-
-    [RelayCommand]
-    private async Task AbrirNoMapa()
-    {
-        var location = new Location(-19.9245, -43.9352);
-
-        var options = new MapLaunchOptions
-        {
-            Name = Destino,
-            NavigationMode = NavigationMode.Driving
-        };
-
-        var abriu = await Map.Default.TryOpenAsync(location, options);
-
-        if (!abriu)
-        {
-            await Shell.Current.DisplayAlertAsync(
-                "Mapa",
-                "Não foi possível abrir o aplicativo de mapas neste dispositivo.",
-                "OK");
-        }
     }
 }

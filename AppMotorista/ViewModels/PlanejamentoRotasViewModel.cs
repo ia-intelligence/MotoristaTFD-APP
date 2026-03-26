@@ -54,13 +54,13 @@ public partial class PlanejamentoRotasViewModel : ObservableObject
     [RelayCommand]
     private async Task NovaRota()
     {
-        await Shell.Current.DisplayAlert("Rota", "Criar nova rota", "OK");
+        await Shell.Current.DisplayAlertAsync("Rota", "Criar nova rota", "OK");
     }
 
     [RelayCommand]
     private async Task AbrirRota(RoutePlanningItem item)
     {
         if (item is null) return;
-        await Shell.Current.DisplayAlert("Rota", $"Destino: {item.Destino}", "OK");
+        await Shell.Current.DisplayAlertAsync("Rota", $"Destino: {item.Destino}", "OK");
     }
 }

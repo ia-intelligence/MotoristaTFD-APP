@@ -84,6 +84,6 @@ public partial class MinhasViagensViewModel : ObservableObject
     {
         if (item is null) return;
 
-        await Shell.Current.GoToAsync(nameof(MapaTestePage));
+        await Shell.Current.GoToAsync(nameof(MapaViagemPage));
     }
 }

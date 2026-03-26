@@ -42,7 +42,7 @@ public partial class AgrupamentoPacientesViewModel : ObservableObject
     [RelayCommand]
     private async Task NovoAgrupamento()
     {
-        await Shell.Current.DisplayAlert("Agrupamento", "Criar novo agrupamento", "OK");
+        await Shell.Current.DisplayAlertAsync("Agrupamento", "Criar novo agrupamento", "OK");
     }
 
     [RelayCommand]
@@ -50,6 +50,6 @@ public partial class AgrupamentoPacientesViewModel : ObservableObject
     {
         if (item is null) return;
 
-        await Shell.Current.DisplayAlert("Grupo", $"{item.Destino}\n{item.Quantidade}", "OK");
+        await Shell.Current.DisplayAlertAsync("Grupo", $"{item.Destino}\n{item.Quantidade}", "OK");
     }
 }

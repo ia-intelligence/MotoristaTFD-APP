@@ -3,9 +3,9 @@ using Microsoft.Maui.Maps;
 
 namespace AppMotorista.Pages;
 
-public partial class MapaTestePage : ContentPage
+public partial class MapaViagemPage : ContentPage
 {
-    public MapaTestePage()
+    public MapaViagemPage()
     {
         InitializeComponent();
 

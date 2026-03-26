@@ -59,6 +59,6 @@ public partial class LocaisViewModel : ObservableObject
     {
         if (item is null) return;
 
-        await Shell.Current.DisplayAlert("Local", $"{item.Nome}\n{item.Endereco}", "OK");
+        await Shell.Current.DisplayAlertAsync("Local", $"{item.Nome}\n{item.Endereco}", "OK");
     }
 }
