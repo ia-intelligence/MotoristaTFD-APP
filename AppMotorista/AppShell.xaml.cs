@@ -22,6 +22,7 @@ namespace AppMotorista
             Routing.RegisterRoute(nameof(DetalheViagemPage), typeof(DetalheViagemPage));
             Routing.RegisterRoute(nameof(MapaViagemPage), typeof(MapaViagemPage));
             Routing.RegisterRoute(nameof(EmbarquePage), typeof(EmbarquePage));
+            Routing.RegisterRoute(nameof(QrCodeScannerPage), typeof(QrCodeScannerPage));
         }
     }
 }

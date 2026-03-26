@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.QrCodeScannerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+    x:DataType="viewmodels:QrCodeScannerViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <Grid
+            Grid.Row="0"
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="48,*,48">
+
+            <ImageButton
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                HorizontalOptions="Start"
+                Source="arrow_left_icon.svg"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Margin="0,14,0,0"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="8">
+
+                <ActivityIndicator
+                    IsRunning="{Binding LendoQrCode}"
+                    IsVisible="{Binding LendoQrCode}"
+                    Color="White"
+                    HeightRequest="18"
+                    WidthRequest="18"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="13"
+                    Text="{Binding StatusLeitura}"
+                    TextColor="#DCE6FF"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Scanner"
+                            TextColor="#1B1B1B" />
+
+                        <Label
+                            FontSize="13"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding Instrucao}"
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Padding="0"
+                    BackgroundColor="#111111"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24"
+                    IsVisible="{Binding CameraDisponivel}">
+
+                    <Grid HeightRequest="360">
+
+                        <zxing:CameraBarcodeReaderView
+                            x:Name="barcodeReader"
+                            IsDetecting="{Binding LendoQrCode}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill" />
+
+                        <Border
+                            WidthRequest="230"
+                            HeightRequest="230"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Stroke="#42A5F5"
+                            StrokeThickness="3"
+                            StrokeShape="RoundRectangle 22" />
+
+                        <BoxView
+                            WidthRequest="220"
+                            HeightRequest="3"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Color="#42A5F5"
+                            IsVisible="{Binding LendoQrCode}" />
+
+                        <Border
+                            Padding="10,6"
+                            Margin="0,18,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start"
+                            BackgroundColor="#1D7AFC"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 14"
+                            IsVisible="{Binding PassageiroValidado}">
+                            <HorizontalStackLayout Spacing="6">
+                                <Label
+                                    FontSize="13"
+                                    Text="✓"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="Passageiro identificado"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <VerticalStackLayout
+                            Spacing="6"
+                            HorizontalOptions="Center"
+                            VerticalOptions="End"
+                            Margin="18,0,18,24">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HorizontalTextAlignment="Center"
+                                Text="Alinhe o QR Code na moldura"
+                                TextColor="White" />
+
+                            <Label
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="A leitura será feita automaticamente"
+                                TextColor="#D0D0D0" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="#FFF4E5"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    IsVisible="{Binding CameraDisponivel, Converter={StaticResource InverseBoolConverter}}">
+                    <Label
+                        FontSize="14"
+                        Text="A câmera não está disponível neste dispositivo."
+                        TextColor="#8A5A00" />
+                </Border>
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    IsVisible="{Binding PassageiroValidado}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Passageiro validado"
+                            TextColor="#1B1B1B" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="{Binding NomePassageiro}"
+                            TextColor="#2357C6" />
+
+                        <Label
+                            FontSize="13"
+                            LineBreakMode="WordWrap"
+                            Text="{Binding DetalhePassageiro}"
+                            TextColor="#666666" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="12">
+                    <Button
+                        BackgroundColor="White"
+                        BorderColor="#2357C6"
+                        BorderWidth="1"
+                        Command="{Binding NovaLeituraCommand}"
+                        CornerRadius="16"
+                        HeightRequest="50"
+                        IsVisible="{Binding LeituraConcluida}"
+                        Text="Ler outro QR Code"
+                        TextColor="#2357C6" />
+
+                    <Button
+                        BackgroundColor="#2357C6"
+                        Command="{Binding ConfirmarEmbarqueCommand}"
+                        CornerRadius="16"
+                        HeightRequest="50"
+                        IsEnabled="{Binding PodeConfirmar}"
+                        Text="Confirmar embarque"
+                        TextColor="White" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

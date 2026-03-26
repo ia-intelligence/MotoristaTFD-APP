@@ -203,7 +203,7 @@ public partial class HomePageViewModel : ObservableObject
     [RelayCommand]
     private async Task AbrirQrCode()
     {
-        await NavegarOuMostrarPlaceholder("QrCodeScannerPage", "Escanear embarque");
+        await NavegarOuMostrarPlaceholder(nameof(QrCodeScannerPage), "Escanear embarque");
     }
 
     [RelayCommand]
@@ -222,17 +222,18 @@ public partial class HomePageViewModel : ObservableObject
     private async Task IrConfig() => await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
 
     private static readonly HashSet<string> RotasImplementadas = new()
-{
-    nameof(HomePage),
-    nameof(MinhasViagensPage),
-    nameof(DetalheViagemPage),
-    nameof(MapaViagemPage),
-    nameof(EmbarquePage),
-    nameof(AlertasPage),
-    nameof(OcorrenciaFormPage),
-    nameof(ConfigPage),
-    nameof(SuportePage)
-};
+    {
+        nameof(HomePage),
+        nameof(MinhasViagensPage),
+        nameof(DetalheViagemPage),
+        nameof(MapaViagemPage),
+        nameof(EmbarquePage),
+        nameof(AlertasPage),
+        nameof(OcorrenciaFormPage),
+        nameof(ConfigPage),
+        nameof(SuportePage),
+        nameof(QrCodeScannerPage)
+    };
 
     private static async Task NavegarOuMostrarPlaceholder(string rota, string titulo)
     {

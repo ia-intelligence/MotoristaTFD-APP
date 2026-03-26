@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using AppMotorista.Pages;
 using AppMotorista.Models;
 
 namespace AppMotorista.ViewModels;
@@ -55,10 +56,7 @@ public partial class EmbarqueViewModel : ObservableObject
     [RelayCommand]
     private async Task LerQrCode()
     {
-        await Shell.Current.DisplayAlertAsync(
-            "QR Code",
-            "Leitura de QR Code será conectada na próxima etapa.",
-            "OK");
+        await Shell.Current.GoToAsync(nameof(QrCodeScannerPage));
     }
 
     [RelayCommand]
