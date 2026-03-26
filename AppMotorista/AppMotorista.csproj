@@ -114,6 +114,9 @@
 	  <MauiXaml Update="Pages\DetalheViagemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\EmbarquePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\EquipeApoioPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

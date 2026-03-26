@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AppMotorista.Pages.EmbarquePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
+    xmlns:pages="clr-namespace:AppMotorista.Pages"
+    x:DataType="viewmodels:EmbarqueViewModel"
+    BackgroundColor="#ECECEC"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- TOPO -->
+        <Grid
+            Grid.Row="0"
+            Padding="18,24,18,18"
+            BackgroundColor="#2357C6"
+            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="48,*">
+
+            <ImageButton
+                BackgroundColor="Transparent"
+                Command="{Binding VoltarCommand}"
+                HeightRequest="26"
+                Source="arrow_left_icon.svg"
+                WidthRequest="26" />
+
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalTextAlignment="Center"
+                Text="{Binding TituloPagina}"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,14,0,0"
+                FontSize="13"
+                Text="{Binding Resumo}"
+                TextColor="#DCE6FF" />
+        </Grid>
+
+        <!-- CONTEÚDO -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
+
+                <!-- RESUMO DA VIAGEM -->
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Resumo da viagem"
+                            TextColor="#1B1B1B" />
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Destino"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Destino}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Horário"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Horario}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Veículo"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding Veiculo}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Spacing="4">
+                                <Label
+                                    FontSize="12"
+                                    Text="Status"
+                                    TextColor="#2357C6" />
+                                <Label
+                                    FontSize="14"
+                                    Text="{Binding StatusGeral}"
+                                    TextColor="#1B1B1B" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- PASSAGEIROS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Passageiros"
+                        TextColor="#1B1B1B" />
+
+                    <CollectionView
+                        ItemsSource="{Binding Passageiros}"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:PassengerBoardingItem">
+                                <Border
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+
+                                    <VerticalStackLayout Spacing="12">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="17"
+                                                    Text="{Binding Nome}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="13"
+                                                    Text="{Binding Acompanhante}"
+                                                    TextColor="#666666" />
+                                            </VerticalStackLayout>
+
+                                            <Border
+                                                Grid.Column="1"
+                                                Padding="10,5"
+                                                BackgroundColor="{Binding StatusCorFundo}"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 12"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    Text="{Binding Status}"
+                                                    TextColor="{Binding StatusCorTexto}" />
+                                            </Border>
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                            <Button
+                                                BackgroundColor="#E8F6EC"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:EmbarquePage}}, Path=BindingContext.MarcarEmbarcadoCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="14"
+                                                HeightRequest="42"
+                                                Text="Embarcado"
+                                                TextColor="#239B56" />
+
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="#FDECEC"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:EmbarquePage}}, Path=BindingContext.MarcarAusenteCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="14"
+                                                HeightRequest="42"
+                                                Text="Ausente"
+                                                TextColor="#C62828" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- AÇÕES -->
+                <VerticalStackLayout Spacing="12">
+                    <Button
+                        BackgroundColor="#F3F5FB"
+                        Command="{Binding LerQrCodeCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Ler QR Code"
+                        TextColor="#2357C6" />
+
+                    <Button
+                        BackgroundColor="#2357C6"
+                        Command="{Binding ConfirmarEmbarqueCommand}"
+                        CornerRadius="16"
+                        HeightRequest="48"
+                        Text="Confirmar embarque"
+                        TextColor="White" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

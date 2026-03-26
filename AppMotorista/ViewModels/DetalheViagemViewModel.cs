@@ -65,9 +65,6 @@ public partial class DetalheViagemViewModel : ObservableObject
     [RelayCommand]
     private async Task AbrirEmbarque()
     {
-        await Shell.Current.DisplayAlertAsync(
-            "Embarque",
-            "Tela de embarque/QR code será conectada na próxima etapa.",
-            "OK");
+        await Shell.Current.GoToAsync(nameof(EmbarquePage));
     }
 }

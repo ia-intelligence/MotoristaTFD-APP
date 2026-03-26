@@ -4,24 +4,27 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:AppMotorista.Models"
+    xmlns:pages="clr-namespace:AppMotorista.Pages"
     xmlns:viewmodels="clr-namespace:AppMotorista.ViewModels"
     x:DataType="viewmodels:AlertasViewModel"
     BackgroundColor="#ECECEC"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*">
+
+        <!-- TOPO -->
         <Grid
+            Grid.Row="0"
             Padding="18,24,18,18"
             BackgroundColor="#2357C6"
-            ColumnDefinitions="48,*,Auto"
-            RowDefinitions="Auto,Auto">
+            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="48,*,Auto">
 
             <ImageButton
-                Grid.RowSpan="2"
                 BackgroundColor="Transparent"
                 Command="{Binding VoltarCommand}"
                 HeightRequest="26"
-                Source="arrow_left_icon.png"
+                Source="arrow_left_icon.svg"
                 WidthRequest="26" />
 
             <Label
@@ -35,18 +38,18 @@
 
             <Button
                 Grid.Column="2"
-                Padding="14,8"
                 BackgroundColor="White"
                 Command="{Binding NovaOcorrenciaCommand}"
                 CornerRadius="14"
                 FontAttributes="Bold"
                 FontSize="12"
+                HeightRequest="38"
+                Padding="12,6"
                 Text="+ Ocorrência"
                 TextColor="#2357C6" />
 
             <Label
                 Grid.Row="1"
-                Grid.Column="0"
                 Grid.ColumnSpan="3"
                 Margin="0,14,0,0"
                 FontSize="13"
@@ -54,103 +57,172 @@
                 TextColor="#DCE6FF" />
         </Grid>
 
+        <!-- CONTEÚDO -->
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="18,18,18,24" Spacing="16">
+            <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
-                <Border
-                    Padding="16"
-                    BackgroundColor="White"
-                    StrokeShape="RoundRectangle 20"
-                    StrokeThickness="0">
-                    <VerticalStackLayout Spacing="6">
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="17"
-                            Text="Painel de monitoramento"
-                            TextColor="#1B1B1B" />
-                        <Label
-                            FontSize="13"
-                            Text="Acompanhe atrasos, pendências operacionais e ocorrências abertas do transporte."
-                            TextColor="#666666" />
-                    </VerticalStackLayout>
-                </Border>
+                <!-- ALERTAS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Alertas ativos"
+                        TextColor="#1B1B1B" />
 
-                <CollectionView ItemsSource="{Binding Alertas}" SelectionMode="None">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
+                    <CollectionView
+                        ItemsSource="{Binding AlertasAtivos}"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:AlertaItem">
-                            <Border
-                                Padding="16"
-                                BackgroundColor="White"
-                                StrokeShape="RoundRectangle 20"
-                                StrokeThickness="0">
-                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label
-                                            FontAttributes="Bold"
-                                            FontSize="17"
-                                            Text="{Binding Titulo}"
-                                            TextColor="#1B1B1B" />
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:AlertaItem">
+                                <Border
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
 
-                                        <Border
-                                            Grid.Column="1"
-                                            Padding="10,5"
-                                            BackgroundColor="{Binding CorFundo}"
-                                            StrokeShape="RoundRectangle 12"
-                                            StrokeThickness="0">
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="12"
-                                                Text="{Binding Severidade}"
-                                                TextColor="{Binding CorTexto}" />
-                                        </Border>
-                                    </Grid>
+                                    <VerticalStackLayout Spacing="12">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="17"
+                                                    Text="{Binding Titulo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="13"
+                                                    Text="{Binding Descricao}"
+                                                    TextColor="#666666" />
+                                            </VerticalStackLayout>
 
-                                    <Label
-                                        Grid.Row="1"
-                                        FontSize="13"
-                                        Text="{Binding Descricao}"
-                                        TextColor="#666666" />
+                                            <Border
+                                                Grid.Column="1"
+                                                Padding="10,5"
+                                                BackgroundColor="{Binding CorFundo}"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 12"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    Text="{Binding Severidade}"
+                                                    TextColor="{Binding CorTexto}" />
+                                            </Border>
+                                        </Grid>
 
-                                    <Grid
-                                        Grid.Row="2"
-                                        ColumnDefinitions="20,*,20,*"
-                                        ColumnSpacing="8">
-                                        <Label FontSize="14" Text="•" />
-                                        <Label
-                                            Grid.Column="1"
-                                            FontSize="13"
-                                            Text="{Binding Origem}"
-                                            TextColor="#666666" />
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                            <VerticalStackLayout Spacing="2">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding Origem}"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding DataHora}"
+                                                    TextColor="#777777" />
+                                            </VerticalStackLayout>
 
-                                        <Label
-                                            Grid.Column="2"
-                                            FontSize="14"
-                                            Text="•" />
-                                        <Label
-                                            Grid.Column="3"
-                                            FontSize="13"
-                                            Text="{Binding DataHora}"
-                                            TextColor="#666666" />
-                                    </Grid>
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="#F3F5FB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:AlertasPage}}, Path=BindingContext.AbrirItemCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="14"
+                                                HeightRequest="40"
+                                                Text="Detalhes"
+                                                TextColor="#2357C6" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
 
-                                    <Button
-                                        Grid.Row="3"
-                                        BackgroundColor="#F3F5FB"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AlertasViewModel}}, Path=AbrirAlertaCommand}"
-                                        CommandParameter="{Binding .}"
-                                        CornerRadius="14"
-                                        HeightRequest="42"
-                                        Text="Ver detalhe"
-                                        TextColor="#2357C6" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <!-- OCORRÊNCIAS -->
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Ocorrências recentes"
+                        TextColor="#1B1B1B" />
+
+                    <CollectionView
+                        ItemsSource="{Binding OcorrenciasRecentes}"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:AlertaItem">
+                                <Border
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+
+                                    <VerticalStackLayout Spacing="12">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="17"
+                                                    Text="{Binding Titulo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="13"
+                                                    Text="{Binding Descricao}"
+                                                    TextColor="#666666" />
+                                            </VerticalStackLayout>
+
+                                            <Border
+                                                Grid.Column="1"
+                                                Padding="10,5"
+                                                BackgroundColor="{Binding CorFundo}"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 12"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    Text="{Binding Severidade}"
+                                                    TextColor="{Binding CorTexto}" />
+                                            </Border>
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                            <VerticalStackLayout Spacing="2">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding Origem}"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding DataHora}"
+                                                    TextColor="#777777" />
+                                            </VerticalStackLayout>
+
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="#F3F5FB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:AlertasPage}}, Path=BindingContext.AbrirItemCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="14"
+                                                HeightRequest="40"
+                                                Text="Detalhes"
+                                                TextColor="#2357C6" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
