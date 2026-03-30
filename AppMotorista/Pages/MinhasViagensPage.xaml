@@ -11,13 +11,13 @@
 
     <Grid RowDefinitions="Auto,*">
 
-        <!-- TOPO -->
+        <!--  TOPO  -->
         <Grid
             Grid.Row="0"
             Padding="18,24,18,18"
             BackgroundColor="#2357C6"
-            RowDefinitions="Auto,Auto"
-            ColumnDefinitions="48,*">
+            ColumnDefinitions="48,*"
+            RowDefinitions="Auto,Auto">
 
             <ImageButton
                 BackgroundColor="Transparent"
@@ -44,119 +44,21 @@
                 TextColor="#DCE6FF" />
         </Grid>
 
-        <!-- CONTEÚDO -->
+        <!--  CONTEÚDO  -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="18,18,18,24" Spacing="18">
 
-
-                <VerticalStackLayout Spacing="12">
-                    <Label
-        FontAttributes="Bold"
-        FontSize="18"
-        Text="Em andamento"
-        TextColor="#1B1B1B" />
-
-                    <CollectionView
-        ItemsSource="{Binding EmAndamento}"
-        SelectionMode="None">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:ReceptionTripItem">
-                                <Border
-                    Padding="16"
-                    BackgroundColor="White"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 20">
-
-                                    <VerticalStackLayout Spacing="12">
-                                        <Grid ColumnDefinitions="*,Auto">
-                                            <VerticalStackLayout Spacing="2">
-                                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="17"
-                                    Text="{Binding Destino}"
-                                    TextColor="#1B1B1B" />
-                                                <Label
-                                    FontSize="13"
-                                    Text="{Binding Data}"
-                                    TextColor="#777777" />
-                                            </VerticalStackLayout>
-
-                                            <Border
-                                Grid.Column="1"
-                                Padding="10,5"
-                                BackgroundColor="#FFF4E5"
-                                StrokeThickness="0"
-                                StrokeShape="RoundRectangle 12">
-                                                <Label
-                                    FontAttributes="Bold"
-                                    FontSize="12"
-                                    Text="{Binding Status}"
-                                    TextColor="#B96A00" />
-                                            </Border>
-                                        </Grid>
-
-                                        <Grid ColumnDefinitions="*,*">
-                                            <VerticalStackLayout Spacing="4">
-                                                <Label FontSize="12" Text="Horário" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Horario}" TextColor="#1B1B1B" />
-                                            </VerticalStackLayout>
-
-                                            <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                                <Label FontSize="12" Text="Veículo" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Veiculo}" TextColor="#1B1B1B" />
-                                            </VerticalStackLayout>
-                                        </Grid>
-
-                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
-                                            <Label
-                                FontAttributes="Bold"
-                                FontSize="12"
-                                Text="●"
-                                TextColor="#F29A2E"
-                                VerticalTextAlignment="Center" />
-
-                                            <Label
-                                Grid.Column="1"
-                                VerticalTextAlignment="Center"
-                                FontSize="13"
-                                Text="Viagem em execução"
-                                TextColor="#666666" />
-
-                                            <Button
-                                Grid.Column="2"
-                                BackgroundColor="#F3F5FB"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MinhasViagensViewModel}}, Path=AbrirMapaCommand}"
-                                CommandParameter="{Binding .}"
-                                CornerRadius="14"
-                                HeightRequest="40"
-                                Text="Mapa"
-                                TextColor="#2357C6" />
-                                        </Grid>
-                                    </VerticalStackLayout>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-
-
-                <!-- CONFIRMADAS -->
+                <!--  EM ANDAMENTO  -->
                 <VerticalStackLayout Spacing="12">
                     <Label
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="Confirmadas"
+                        Text="Em andamento"
                         TextColor="#1B1B1B" />
 
-                    <CollectionView
-                        ItemsSource="{Binding Confirmadas}"
-                        SelectionMode="None">
+                    <CollectionView ItemsSource="{Binding EmAndamento}" SelectionMode="None">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
@@ -164,29 +66,189 @@
                                 <Border
                                     Padding="16"
                                     BackgroundColor="White"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 20">
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0">
 
-                                    <VerticalStackLayout Spacing="12">
+                                    <VerticalStackLayout Spacing="14">
+
                                         <Grid ColumnDefinitions="*,Auto">
-                                            <VerticalStackLayout Spacing="2">
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontSize="17"
-                                                    Text="{Binding Destino}"
-                                                    TextColor="#1B1B1B" />
+                                            <VerticalStackLayout Spacing="4">
                                                 <Label
                                                     FontSize="13"
                                                     Text="{Binding Data}"
                                                     TextColor="#777777" />
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="24"
+                                                    Text="{Binding Horario}"
+                                                    TextColor="#2357C6" />
+                                            </VerticalStackLayout>
+
+                                            <Border
+                                                Grid.Column="1"
+                                                Padding="10,5"
+                                                BackgroundColor="#E8F1FF"
+                                                StrokeShape="RoundRectangle 12"
+                                                StrokeThickness="0"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    Text="{Binding Status}"
+                                                    TextColor="#2357C6" />
+                                            </Border>
+                                        </Grid>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Destino}"
+                                                TextColor="#1B1B1B" />
+                                            <Label
+                                                FontSize="13"
+                                                Text="{Binding ResumoRota}"
+                                                TextColor="#666666" />
+                                        </VerticalStackLayout>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Veículo"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Veiculo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding VeiculoDetalhe}"
+                                                    TextColor="#666666" />
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Motorista"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Motorista}"
+                                                    TextColor="#1B1B1B" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontSize="12"
+                                                Text="Passageiros"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding ResumoPassageiros}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontSize="12"
+                                                Text="Equipe de apoio"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding EquipeApoio}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <Border
+                                            Padding="10,6"
+                                            BackgroundColor="#FFF4E5"
+                                            HorizontalOptions="Start"
+                                            IsVisible="{Binding TravaFaturamentoAtiva}"
+                                            StrokeShape="RoundRectangle 14"
+                                            StrokeThickness="0">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="Veículo próprio"
+                                                TextColor="#B96A00" />
+                                        </Border>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                            <Button
+                                                Grid.Column="0"
+                                                BackgroundColor="#F3F5FB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirMapaCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver mapa"
+                                                TextColor="#2357C6" />
+
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="#2357C6"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirDetalheCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver detalhes"
+                                                TextColor="White" />
+                                        </Grid>
+
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!--  CONFIRMADAS  -->
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Confirmadas"
+                        TextColor="#1B1B1B" />
+
+                    <CollectionView ItemsSource="{Binding Confirmadas}" SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:ReceptionTripItem">
+                                <Border
+                                    Padding="16"
+                                    BackgroundColor="White"
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0">
+
+                                    <VerticalStackLayout Spacing="14">
+
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <VerticalStackLayout Spacing="4">
+                                                <Label
+                                                    FontSize="13"
+                                                    Text="{Binding Data}"
+                                                    TextColor="#777777" />
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="24"
+                                                    Text="{Binding Horario}"
+                                                    TextColor="#2357C6" />
                                             </VerticalStackLayout>
 
                                             <Border
                                                 Grid.Column="1"
                                                 Padding="10,5"
                                                 BackgroundColor="#E8F6EC"
+                                                StrokeShape="RoundRectangle 12"
                                                 StrokeThickness="0"
-                                                StrokeShape="RoundRectangle 12">
+                                                VerticalOptions="Start">
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="12"
@@ -195,35 +257,104 @@
                                             </Border>
                                         </Grid>
 
-                                        <Grid ColumnDefinitions="*,*">
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Destino}"
+                                                TextColor="#1B1B1B" />
+                                            <Label
+                                                FontSize="13"
+                                                Text="{Binding ResumoRota}"
+                                                TextColor="#666666" />
+                                        </VerticalStackLayout>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                                             <VerticalStackLayout Spacing="4">
-                                                <Label FontSize="12" Text="Horário" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Horario}" TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Veículo"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Veiculo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding VeiculoDetalhe}"
+                                                    TextColor="#666666" />
                                             </VerticalStackLayout>
 
                                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                                <Label FontSize="12" Text="Veículo" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Veiculo}" TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Motorista"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Motorista}"
+                                                    TextColor="#1B1B1B" />
                                             </VerticalStackLayout>
                                         </Grid>
 
-                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <VerticalStackLayout Spacing="4">
                                             <Label
-                                                VerticalTextAlignment="Center"
-                                                FontSize="13"
-                                                Text="{Binding Motorista}"
-                                                TextColor="#666666" />
+                                                FontSize="12"
+                                                Text="Passageiros"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding ResumoPassageiros}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontSize="12"
+                                                Text="Equipe de apoio"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding EquipeApoio}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <Border
+                                            Padding="10,6"
+                                            BackgroundColor="#FFF4E5"
+                                            HorizontalOptions="Start"
+                                            IsVisible="{Binding TravaFaturamentoAtiva}"
+                                            StrokeShape="RoundRectangle 14"
+                                            StrokeThickness="0">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="Veículo próprio"
+                                                TextColor="#B96A00" />
+                                        </Border>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                            <Button
+                                                Grid.Column="0"
+                                                BackgroundColor="#F3F5FB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirMapaCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver mapa"
+                                                TextColor="#2357C6" />
 
                                             <Button
                                                 Grid.Column="1"
-                                                BackgroundColor="#F3F5FB"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MinhasViagensViewModel}}, Path=AbrirDetalheCommand}"
+                                                BackgroundColor="#2357C6"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirDetalheCommand}"
                                                 CommandParameter="{Binding .}"
-                                                CornerRadius="14"
-                                                HeightRequest="40"
-                                                Text="Ver detalhe"
-                                                TextColor="#2357C6" />
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver detalhes"
+                                                TextColor="White" />
                                         </Grid>
+
                                     </VerticalStackLayout>
                                 </Border>
                             </DataTemplate>
@@ -231,10 +362,7 @@
                     </CollectionView>
                 </VerticalStackLayout>
 
-                <!-- EM ANDAMENTO -->
-                
-
-                <!-- FINALIZADAS -->
+                <!--  FINALIZADAS  -->
                 <VerticalStackLayout Spacing="12">
                     <Label
                         FontAttributes="Bold"
@@ -242,11 +370,9 @@
                         Text="Finalizadas"
                         TextColor="#1B1B1B" />
 
-                    <CollectionView
-                        ItemsSource="{Binding Finalizadas}"
-                        SelectionMode="None">
+                    <CollectionView ItemsSource="{Binding Finalizadas}" SelectionMode="None">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                            <LinearItemsLayout ItemSpacing="14" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.ItemTemplate>
@@ -254,58 +380,124 @@
                                 <Border
                                     Padding="16"
                                     BackgroundColor="White"
-                                    StrokeThickness="0"
                                     StrokeShape="RoundRectangle 20"
-                                    Opacity="0.92">
+                                    StrokeThickness="0">
 
-                                    <VerticalStackLayout Spacing="12">
+                                    <VerticalStackLayout Spacing="14">
+
                                         <Grid ColumnDefinitions="*,Auto">
-                                            <VerticalStackLayout Spacing="2">
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontSize="17"
-                                                    Text="{Binding Destino}"
-                                                    TextColor="#1B1B1B" />
+                                            <VerticalStackLayout Spacing="4">
                                                 <Label
                                                     FontSize="13"
                                                     Text="{Binding Data}"
                                                     TextColor="#777777" />
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="24"
+                                                    Text="{Binding Horario}"
+                                                    TextColor="#2357C6" />
                                             </VerticalStackLayout>
 
                                             <Border
                                                 Grid.Column="1"
                                                 Padding="10,5"
-                                                BackgroundColor="#EEF1F4"
+                                                BackgroundColor="#F0F0F0"
+                                                StrokeShape="RoundRectangle 12"
                                                 StrokeThickness="0"
-                                                StrokeShape="RoundRectangle 12">
+                                                VerticalOptions="Start">
                                                 <Label
                                                     FontAttributes="Bold"
                                                     FontSize="12"
                                                     Text="{Binding Status}"
-                                                    TextColor="#5F6B7A" />
+                                                    TextColor="#666666" />
                                             </Border>
                                         </Grid>
 
-                                        <Grid ColumnDefinitions="*,*">
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Destino}"
+                                                TextColor="#1B1B1B" />
+                                            <Label
+                                                FontSize="13"
+                                                Text="{Binding ResumoRota}"
+                                                TextColor="#666666" />
+                                        </VerticalStackLayout>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                                             <VerticalStackLayout Spacing="4">
-                                                <Label FontSize="12" Text="Horário" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Horario}" TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Veículo"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Veiculo}"
+                                                    TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="{Binding VeiculoDetalhe}"
+                                                    TextColor="#666666" />
                                             </VerticalStackLayout>
 
                                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                                <Label FontSize="12" Text="Veículo" TextColor="#2357C6" />
-                                                <Label FontSize="14" Text="{Binding Veiculo}" TextColor="#1B1B1B" />
+                                                <Label
+                                                    FontSize="12"
+                                                    Text="Motorista"
+                                                    TextColor="#2357C6" />
+                                                <Label
+                                                    FontSize="14"
+                                                    Text="{Binding Motorista}"
+                                                    TextColor="#1B1B1B" />
                                             </VerticalStackLayout>
                                         </Grid>
 
-                                        <Button
-                                            BackgroundColor="#F3F5FB"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MinhasViagensViewModel}}, Path=AbrirDetalheCommand}"
-                                            CommandParameter="{Binding .}"
-                                            CornerRadius="14"
-                                            HeightRequest="40"
-                                            Text="Consultar viagem"
-                                            TextColor="#2357C6" />
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontSize="12"
+                                                Text="Passageiros"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding ResumoPassageiros}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Spacing="4">
+                                            <Label
+                                                FontSize="12"
+                                                Text="Equipe de apoio"
+                                                TextColor="#2357C6" />
+                                            <Label
+                                                FontSize="14"
+                                                Text="{Binding EquipeApoio}"
+                                                TextColor="#1B1B1B" />
+                                        </VerticalStackLayout>
+
+                                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                            <Button
+                                                Grid.Column="0"
+                                                BackgroundColor="#F3F5FB"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirMapaCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver mapa"
+                                                TextColor="#2357C6" />
+
+                                            <Button
+                                                Grid.Column="1"
+                                                BackgroundColor="#2357C6"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirDetalheCommand}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="16"
+                                                HeightRequest="46"
+                                                Text="Ver detalhes"
+                                                TextColor="White" />
+                                        </Grid>
+
                                     </VerticalStackLayout>
                                 </Border>
                             </DataTemplate>

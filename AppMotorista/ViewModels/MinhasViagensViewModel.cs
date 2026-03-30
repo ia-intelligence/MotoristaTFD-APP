@@ -28,7 +28,13 @@ public partial class MinhasViagensViewModel : ObservableObject
             Veiculo = "Citroën Jumpy",
             Motorista = "Gabriel Almeida",
             Status = "Confirmada",
-            TravaFaturamentoAtiva = true
+            TravaFaturamentoAtiva = true,
+
+            // complementares
+            ResumoRota = "Origem: UBS Central • Parada: Avenida Brasil",
+            ResumoPassageiros = "3 passageiros • 1 acompanhante",
+            EquipeApoio = "Juliana Costa • Técnica de Enfermagem",
+            VeiculoDetalhe = "Placa QWE-1234 • Diesel • 4 lugares"
         });
 
         Confirmadas.Add(new ReceptionTripItem
@@ -39,7 +45,12 @@ public partial class MinhasViagensViewModel : ObservableObject
             Veiculo = "Renault Master",
             Motorista = "Gabriel Almeida",
             Status = "Confirmada",
-            TravaFaturamentoAtiva = false
+            TravaFaturamentoAtiva = false,
+
+            ResumoRota = "Origem: UBS Barreiro • Parada: Rua Pará",
+            ResumoPassageiros = "2 passageiros • 0 acompanhantes",
+            EquipeApoio = "Sem equipe de apoio",
+            VeiculoDetalhe = "Placa RTY-9087 • Diesel • 3 lugares"
         });
 
         EmAndamento.Add(new ReceptionTripItem
@@ -50,7 +61,12 @@ public partial class MinhasViagensViewModel : ObservableObject
             Veiculo = "Ford Transit",
             Motorista = "Gabriel Almeida",
             Status = "Em andamento",
-            TravaFaturamentoAtiva = true
+            TravaFaturamentoAtiva = true,
+
+            ResumoRota = "Origem: UBS Centro-Sul • Parada: Rua da Bahia",
+            ResumoPassageiros = "4 passageiros • 1 acompanhante",
+            EquipeApoio = "Marcos Vinícius • Maqueiro",
+            VeiculoDetalhe = "Placa HJK-4521 • Diesel • 5 lugares"
         });
 
         Finalizadas.Add(new ReceptionTripItem
@@ -61,7 +77,12 @@ public partial class MinhasViagensViewModel : ObservableObject
             Veiculo = "Citroën Jumpy",
             Motorista = "Gabriel Almeida",
             Status = "Finalizada",
-            TravaFaturamentoAtiva = false
+            TravaFaturamentoAtiva = false,
+
+            ResumoRota = "Origem: UBS Central • Destino direto",
+            ResumoPassageiros = "1 passageiro • 0 acompanhantes",
+            EquipeApoio = "Sem equipe de apoio",
+            VeiculoDetalhe = "Placa QWE-1234 • Diesel • 4 lugares"
         });
     }
 
