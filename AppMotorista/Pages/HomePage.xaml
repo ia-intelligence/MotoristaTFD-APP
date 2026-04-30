@@ -13,7 +13,7 @@
     <Grid>
 
         <!--  CONTEÚDO PRINCIPAL  -->
-        <Grid RowDefinitions="Auto,*">
+        <Grid RowDefinitions="Auto,*,Auto">
 
             <!--  TOPO AZUL  -->
             <Grid
@@ -23,6 +23,7 @@
                 ColumnDefinitions="40,*,40"
                 HeightRequest="46">
 
+                <!--  BOTÃO MENU LATERAL  -->
                 <ImageButton
                     Grid.Column="0"
                     Padding="4"
@@ -57,7 +58,7 @@
 
             <!--  CONTEÚDO  -->
             <ScrollView Grid.Row="1">
-                <VerticalStackLayout Padding="14,16,14,28" Spacing="16">
+                <VerticalStackLayout Padding="14,16,14,24" Spacing="16">
 
                     <!--  SAUDAÇÃO  -->
                     <VerticalStackLayout Spacing="2">
@@ -108,6 +109,7 @@
                                         FontSize="21"
                                         Text="{Binding TotalViagens}"
                                         TextColor="#2357C6" />
+
                                     <Label
                                         FontSize="10"
                                         Text="Viagens"
@@ -120,6 +122,7 @@
                                         FontSize="21"
                                         Text="{Binding TotalPassageiros}"
                                         TextColor="#2357C6" />
+
                                     <Label
                                         FontSize="10"
                                         Text="Passageiros"
@@ -132,6 +135,7 @@
                                         FontSize="21"
                                         Text="{Binding TotalAlertas}"
                                         TextColor="#E53935" />
+
                                     <Label
                                         FontSize="10"
                                         Text="Alertas"
@@ -159,7 +163,11 @@
                                 FontSize="10"
                                 Text="Ver todas"
                                 TextColor="#2357C6"
-                                VerticalTextAlignment="Center" />
+                                VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IrViagensCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Grid>
 
                         <dx:DXCollectionView
@@ -410,6 +418,153 @@
 
                 </VerticalStackLayout>
             </ScrollView>
+
+            <!--  BOTTOM NAV  -->
+            <Border
+                Grid.Row="2"
+                Padding="8,8,8,10"
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18,18,0,0" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#18000000"
+                        Opacity="0.15"
+                        Radius="10"
+                        Offset="0,-3" />
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="*,*,*,*">
+
+                    <!--  INÍCIO ATIVO  -->
+                    <Border
+                        Grid.Column="0"
+                        BackgroundColor="#EEF3FF"
+                        HeightRequest="58"
+                        HorizontalOptions="Center"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        WidthRequest="70">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrInicioCommand}" />
+                            </Grid.GestureRecognizers>
+
+                            <VerticalStackLayout
+                                HorizontalOptions="Center"
+                                Spacing="3"
+                                VerticalOptions="Center">
+
+                                <Image
+                                    HeightRequest="22"
+                                    HorizontalOptions="Center"
+                                    Source="menunavbar_home_ativo_icon.svg"
+                                    WidthRequest="22" />
+
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="10"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Início"
+                                    TextColor="#2357C6" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!--  VIAGENS INATIVO  -->
+                    <Grid Grid.Column="1" HeightRequest="58">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrViagensCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+
+                            <Image
+                                HeightRequest="22"
+                                HorizontalOptions="Center"
+                                Source="menunavbar_viagens_inativo_icon.svg"
+                                WidthRequest="22" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Viagens"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!--  ALERTAS INATIVO  -->
+                    <Grid Grid.Column="2" HeightRequest="58">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrAlertasCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+
+                            <Image
+                                HeightRequest="22"
+                                HorizontalOptions="Center"
+                                Source="menunavbar_alertas_inativo_icon.svg"
+                                WidthRequest="22" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Alertas"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!--  PERFIL INATIVO  -->
+                    <Grid Grid.Column="3" HeightRequest="58">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrPerfilCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="3"
+                            VerticalOptions="Center">
+
+                            <Image
+                                HeightRequest="22"
+                                HorizontalOptions="Center"
+                                Source="menunavbar_perfil_inativo_icon.svg"
+                                WidthRequest="22" />
+
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="10"
+                                HorizontalTextAlignment="Center"
+                                Text="Perfil"
+                                TextColor="#6B7280" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                </Grid>
+            </Border>
+
         </Grid>
 
         <!--  OVERLAY ESCURO  -->
@@ -429,7 +584,7 @@
 
             <Grid RowDefinitions="Auto,*,Auto">
 
-                <!--  PERFIL  -->
+                <!--  PERFIL DO MOTORISTA  -->
                 <VerticalStackLayout
                     Grid.Row="0"
                     Padding="18,28,18,20"
@@ -487,10 +642,9 @@
 
                 </VerticalStackLayout>
 
-                <!--  ITENS  -->
+                <!--  ITENS DO MENU  -->
                 <CollectionView
                     Grid.Row="1"
-                    Margin="0,0,0,0"
                     ItemsSource="{Binding ItensMenu}"
                     SelectionMode="None">
 

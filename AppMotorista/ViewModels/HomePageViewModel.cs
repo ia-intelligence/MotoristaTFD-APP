@@ -273,9 +273,9 @@ public partial class HomePageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task IrConfig()
+    private async Task IrPerfil()
     {
-        await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Configurações");
+        await NavegarOuMostrarPlaceholder(nameof(ConfigPage), "Perfil");
     }
 
     [RelayCommand]
